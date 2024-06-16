@@ -15,6 +15,7 @@ namespace SmartItApp
             {
                 if (!context.Employees.Any(e => e.UserName == "Supervisor"))
                 {
+                    
                     var supervisor = new Employee()
                     {
                         Id=4,
@@ -56,7 +57,6 @@ namespace SmartItApp
                             throw;
                         }
                     }
-
                     string insertRolesSql = $@"
                     INSERT INTO dbo.AspNetUserRoles (UserId, RoleId) VALUES (4, 1);
                     INSERT INTO dbo.AspNetUserRoles (UserId, RoleId) VALUES (4, 2);
@@ -66,7 +66,9 @@ namespace SmartItApp
 
                     context.Database.ExecuteSqlRaw(insertRolesSql);
                     await context.SaveChangesAsync();
+
                 }
+           
             }
         }
     }

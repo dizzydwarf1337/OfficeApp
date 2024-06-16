@@ -400,7 +400,7 @@ namespace SmartItApp.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("ProjectEmployees");
+                    b.ToTable("ProjectEmployees", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

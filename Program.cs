@@ -27,14 +27,7 @@ builder.Services.AddAuthorization(options =>
 
 });
 var app = builder.Build();
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-        var context = services.GetRequiredService<SmartItAppContext>();
-        context.Database.Migrate();
-        Seed.DbInitializer.Initialize(context);
-    
-}
+
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
@@ -48,7 +41,14 @@ using (var scope = app.Services.CreateScope())
         }
     }
 }
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<SmartItAppContext>();
+    context.Database.Migrate();
+    Seed.DbInitializer.Initialize(context);
 
+}
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
