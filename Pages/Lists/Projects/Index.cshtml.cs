@@ -51,7 +51,7 @@ namespace SmartItApp.Pages.Lists.Projects
                 "Status_desc" => projectsIQ.OrderByDescending(e => e.Status),
                 _ => projectsIQ.OrderBy(e => e.ProjectManager),
             };
-            if (User.IsInRole("Admin") || User.IsInRole("Supervisor"))
+            if (User.IsInRole("Admin") || User.IsInRole("Supervisor") || User.IsInRole("HR"))
             {
                 Project = await projectsIQ.AsNoTracking().ToListAsync();
             }

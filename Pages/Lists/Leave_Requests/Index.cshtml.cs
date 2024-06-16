@@ -37,7 +37,8 @@ namespace SmartItApp.Pages.Lists.Leave_Requests
             }
 
             CurrentSortOrder = sortOrder ?? "Id_asc";
-            IQueryable<LeaveRequest> LeaveRequestsIQ = _context.LeaveRequests;
+            IQueryable<LeaveRequest> LeaveRequestsIQ = from s in _context.LeaveRequests
+                                                       select s;
             LeaveRequestsIQ = sortOrder switch
             {
                 "Id_desc" => LeaveRequestsIQ.OrderByDescending(e => e.Id),
@@ -59,19 +60,20 @@ namespace SmartItApp.Pages.Lists.Leave_Requests
             var user = await _signInManager.UserManager.GetUserAsync(User);
             if (User.IsInRole("Admin") || User.IsInRole("Supervisor"))
             {
-                LeaveRequest = await LeaveRequestsIQ.ToListAsync();
+                LeaveRequest = await LeaveRequestsIQ.AsNoTracking().ToListAsync();
             }
             else if (User.IsInRole("HR") || User.IsInRole("PM"))
             {
                 var currentUser = await _signInManager.UserManager.GetUserAsync(User);
                 var subdivision = currentUser.Subdivision;
-                LeaveRequest = await _context.LeaveRequests
+                LeaveRequest = await LeaveRequestsIQ
                     .Where(lr => _context.Employees.Any(e => e.Id == lr.Employee && e.Subdivision == subdivision))
+                    .AsNoTracking()
                     .ToListAsync();
             }
             else if (User.IsInRole("Employee"))
             {
-                LeaveRequest = await LeaveRequestsIQ.Where(x => x.Employee == user.Id).ToListAsync();
+                LeaveRequest = await LeaveRequestsIQ.Where(x => x.Employee == user.Id).AsNoTracking().ToListAsync();
                 employee = user;
             }
 

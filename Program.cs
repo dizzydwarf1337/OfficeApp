@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using SmartItApp;
 using SmartItApp.Models;
 
 
@@ -16,7 +16,6 @@ builder.Services.AddIdentity<Employee, IdentityRole<int>>(options => options.Sig
         .AddDefaultTokenProviders()
         .AddDefaultUI();
 
-// Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddAuthorization(options =>
 {
@@ -28,7 +27,14 @@ builder.Services.AddAuthorization(options =>
 
 });
 var app = builder.Build();
-
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+        var context = services.GetRequiredService<SmartItAppContext>();
+        context.Database.Migrate();
+        Seed.DbInitializer.Initialize(context);
+    
+}
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();

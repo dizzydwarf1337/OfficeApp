@@ -170,160 +170,77 @@ namespace SmartItApp.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            //migrationBuilder.CreateTable(
-            //    name: "Leave Request",
-            //    columns: table => new
-            //    {
-            //        ID = table.Column<int>(type: "int", nullable: false)
-            //            .Annotation("SqlServer:Identity", "1, 1"),
-            //        Employee = table.Column<int>(type: "int", nullable: false),
-            //        AbsenceReason = table.Column<string>(name: "Absence Reason", type: "nvarchar(200)", maxLength: 200, nullable: false),
-            //        StartDate = table.Column<DateOnly>(name: "Start Date", type: "date", nullable: false),
-            //        EndDate = table.Column<DateOnly>(name: "End Date", type: "date", nullable: false),
-            //        Comment = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-            //        Status = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
-            //    },
-            //    constraints: table =>
-            //    {
-            //        table.PrimaryKey("PK__Leave Re__3214EC27F5BD9FEC", x => x.ID);
-            //        table.ForeignKey(
-            //            name: "FK_LeaveRequest",
-            //            column: x => x.Employee,
-            //            principalTable: "AspNetUsers",
-            //            principalColumn: "ID");
-            //    });
+            migrationBuilder.CreateTable(
+                name: "Leave Request",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Employee = table.Column<int>(type: "int", nullable: false),
+                    AbsenceReason = table.Column<string>(name: "Absence Reason", type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    StartDate = table.Column<DateOnly>(name: "Start Date", type: "date", nullable: false),
+                    EndDate = table.Column<DateOnly>(name: "End Date", type: "date", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK__Leave Re__3214EC27F5BD9FEC", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_LeaveRequest",
+                        column: x => x.Employee,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "ID");
+                });
 
-            //migrationBuilder.CreateTable(
-            //    name: "Project",
-            //    columns: table => new
-            //    {
-            //        ID = table.Column<int>(type: "int", nullable: false)
-            //            .Annotation("SqlServer:Identity", "1, 1"),
-            //        ProjectType = table.Column<string>(name: "Project Type", type: "nvarchar(200)", maxLength: 200, nullable: false),
-            //        StartDate = table.Column<DateOnly>(name: "Start Date", type: "date", nullable: false),
-            //        EndDate = table.Column<DateOnly>(name: "End Date", type: "date", nullable: false),
-            //        ProjectManager = table.Column<int>(name: "Project Manager", type: "int", nullable: false),
-            //        Comment = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-            //        Status = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
-            //    },
-            //    constraints: table =>
-            //    {
-            //        table.PrimaryKey("PK__Project__3214EC271F4B943D", x => x.ID);
-            //        table.ForeignKey(
-            //            name: "FK_Project",
-            //            column: x => x.ProjectManager,
-            //            principalTable: "AspNetUsers",
-            //            principalColumn: "ID");
-            //    });
+            migrationBuilder.CreateTable(
+                name: "Project",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProjectType = table.Column<string>(name: "Project Type", type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    StartDate = table.Column<DateOnly>(name: "Start Date", type: "date", nullable: false),
+                    EndDate = table.Column<DateOnly>(name: "End Date", type: "date", nullable: false),
+                    ProjectManager = table.Column<int>(name: "Project Manager", type: "int", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK__Project__3214EC271F4B943D", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Project",
+                        column: x => x.ProjectManager,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "ID");
+                });
 
-            //migrationBuilder.CreateTable(
-            //    name: "Approval Request",
-            //    columns: table => new
-            //    {
-            //        ID = table.Column<int>(type: "int", nullable: false)
-            //            .Annotation("SqlServer:Identity", "1, 1"),
-            //        Approver = table.Column<int>(type: "int", nullable: false),
-            //        LeaveRequest = table.Column<int>(name: "Leave Request", type: "int", nullable: false),
-            //        Status = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
-            //    },
-            //    constraints: table =>
-            //    {
-            //        table.PrimaryKey("PK__Approval__3214EC27AE2FE38E", x => x.ID);
-            //        table.ForeignKey(
-            //            name: "FK1_ApprovalRequest",
-            //            column: x => x.Approver,
-            //            principalTable: "AspNetUsers",
-            //            principalColumn: "ID");
-            //        table.ForeignKey(
-            //            name: "FK2_ApprovalRequest",
-            //            column: x => x.LeaveRequest,
-            //            principalTable: "Leave Request",
-            //            principalColumn: "ID");
-            //    });
+            migrationBuilder.CreateTable(
+                name: "Approval Request",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Approver = table.Column<int>(type: "int", nullable: false),
+                    LeaveRequest = table.Column<int>(name: "Leave Request", type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK__Approval__3214EC27AE2FE38E", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK1_ApprovalRequest",
+                        column: x => x.Approver,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "ID");
+                    table.ForeignKey(
+                        name: "FK2_ApprovalRequest",
+                        column: x => x.LeaveRequest,
+                        principalTable: "Leave Request",
+                        principalColumn: "ID");
+                });
 
-            //migrationBuilder.CreateIndex(
-            //    name: "IDX_ApprovalRequest_Approver",
-            //    table: "Approval Request",
-            //    column: "Approver");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IDX_ApprovalRequest_LeaveRequest",
-            //    table: "Approval Request",
-            //    column: "Leave Request");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_AspNetRoleClaims_RoleId",
-            //    table: "AspNetRoleClaims",
-            //    column: "RoleId");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "RoleNameIndex",
-            //    table: "AspNetRoles",
-            //    column: "NormalizedName",
-            //    unique: true,
-            //    filter: "[NormalizedName] IS NOT NULL");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_AspNetUserClaims_UserId",
-            //    table: "AspNetUserClaims",
-            //    column: "UserId");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_AspNetUserLogins_UserId",
-            //    table: "AspNetUserLogins",
-            //    column: "UserId");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_AspNetUserRoles_RoleId",
-            //    table: "AspNetUserRoles",
-            //    column: "RoleId");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "EmailIndex",
-            //    table: "AspNetUsers",
-            //    column: "NormalizedEmail");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IDX_Employee_Position",
-            //    table: "AspNetUsers",
-            //    column: "Position");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IDX_Employee_Subdivision",
-            //    table: "AspNetUsers",
-            //    column: "Subdivision");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_AspNetUsers_People Partner",
-            //    table: "AspNetUsers",
-            //    column: "People Partner");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "UserNameIndex",
-            //    table: "AspNetUsers",
-            //    column: "NormalizedUserName",
-            //    unique: true,
-            //    filter: "[NormalizedUserName] IS NOT NULL");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IDX_LeaveRequest_Employee",
-            //    table: "Leave Request",
-            //    column: "Employee");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IDX_LeaveRequest_StartDate",
-            //    table: "Leave Request",
-            //    column: "Start Date");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IDX_Project_ProjectManager",
-            //    table: "Project",
-            //    column: "Project Manager");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IDX_Project_ProjectType",
-            //    table: "Project",
-            //    column: "Project Type");
         }
 
         /// <inheritdoc />
