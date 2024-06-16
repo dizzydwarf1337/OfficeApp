@@ -1,0 +1,99 @@
+﻿@page
+@model SmartItApp.Pages.Lists.Projects.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Project</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Project.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Project.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Project.ProjectManager)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Project.ProjectManager)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Project.ProjectType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Project.ProjectType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Project.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Project.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Project.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Project.EndDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Project.Comment)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Project.Comment)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Project.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Project.Status)
+        </dd>
+    </dl>
+    @if (Model.ProjectEmployees != null && Model.ProjectEmployees.Any())
+    {
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Project Employees</h5>
+                <ul class="list-group">
+                    @foreach (var item in Model.ProjectEmployees)
+                    {
+                        <li class="list-group-item">@item.FullName</li>
+                        <form method="Post" asp-page-handler="DeleteFromProject">
+                            <input type="hidden" name="EmployeeId" value="@item.Id"/>
+                            <input type="hidden" name="ProjectId" value="@Model.Project.Id" />
+                            <button class="btn btn-outline-danger" type="submit">Delete Employee</button>
+                        </form>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>No project employees found.</p>
+    }
+
+    <form method="post" asp-page-handler="AddEmployee">
+        <input type="hidden" name="id" value="@Model.Project.Id" />
+        <div class="form-group">
+            <label for="employeeId">Select Employee to add:</label>
+            <select name="employeeId" id="employeeId" class="form-control">
+                @foreach (var employee in Model.PMEmployees)
+                {
+                    <option value="@employee.Id">@employee.FullName</option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Employee</button>
+    </form>
+
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Project.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

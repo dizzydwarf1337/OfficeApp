@@ -1,0 +1,119 @@
+﻿@page
+@model SmartItApp.Pages.Lists.Employees.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Employees</h1>
+
+<p>
+    @if (User.IsInRole("Admin") || User.IsInRole("HR"))
+    {
+        <button type="button" class="btn btn-success">
+            <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Add Employee</a>
+        </button>
+    }
+</p>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+<div class="container">
+    <div class="row height d-flex justify-content-center align-items-center">
+        <div class="col-md-6">
+            <div class="form d-flex" style="margin-bottom:10px">
+                    <form method="post" asp-page-handler="Find" class="d-flex w-100">
+                    <input asp-for="SearchString" class="form-control form-input" placeholder="Search by name">
+                    <button class="btn btn-outline-dark mt-auto" style="margin-inline-start:10px" type="submit">Find</button>
+                </form>
+            </div>
+                <div class="form d-flex" style="margin-bottom:10px">
+                    <form method="post" asp-page-handler="FindId" class="d-flex w-100">
+                        <input asp-for="SearchStringId" class="form-control form-input" placeholder="Search by ID">
+                        <button class="btn btn-outline-dark mt-auto" style="margin-inline-start:10px" type="submit">Find</button>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<table class="table">
+
+    <thead>
+        <tr>
+                <th>
+                    <a asp-page="./Index" asp-route-sortOrder="@Model.GetSortOrder("Id",Model.CurrentSortOrder)">
+                        @Html.DisplayNameFor(model => model.Employee[0].Id)
+                    </a>
+                </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.GetSortOrder("FullName",Model.CurrentSortOrder)">
+                @Html.DisplayNameFor(model => model.Employee[0].FullName)
+                </a>
+            </th>
+            <th>
+                 <a asp-page="./Index" asp-route-sortOrder="@Model.GetSortOrder("Subdivision",Model.CurrentSortOrder)">
+                @Html.DisplayNameFor(model => model.Employee[0].Subdivision)
+                </a>
+            </th>
+            <th>
+                 <a asp-page="./Index" asp-route-sortOrder="@Model.GetSortOrder("Position",Model.CurrentSortOrder)">
+                @Html.DisplayNameFor(model => model.Employee[0].Position)
+                </a>
+            </th>
+            <th>
+                 <a asp-page="./Index" asp-route-sortOrder="@Model.GetSortOrder("Status",Model.CurrentSortOrder)">
+                @Html.DisplayNameFor(model => model.Employee[0].Status)
+                </a>
+            </th>
+            <th>
+                 <a asp-page="./Index" asp-route-sortOrder="@Model.GetSortOrder("DaysOff",Model.CurrentSortOrder)">
+                @Html.DisplayNameFor(model => model.Employee[0].DaysOff)
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Employee) {
+        <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subdivision)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaysOff)
+            </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> 
+
+                        @if (User.IsInRole("Admin") || User.IsInRole("HR"))
+                        {
+                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                            <form method="post" asp-page-handler="ChangeStatus" style="display:inline;">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                                    Change Status
+                                </button>
+                            </form>
+                        }
+                    @if (User.IsInRole("Supervisor"))
+                    {
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

@@ -1,0 +1,48 @@
+﻿@page
+@model SmartItApp.Pages.Lists.Leave_Requests.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>LeaveRequest</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LeaveRequest.AbsenceReason" class="control-label"></label>
+                <input asp-for="LeaveRequest.AbsenceReason" class="form-control" />
+                <span asp-validation-for="LeaveRequest.AbsenceReason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LeaveRequest.StartDate" class="control-label"></label>
+                <input asp-for="LeaveRequest.StartDate" type="date" class="form-control" />
+                <span asp-validation-for="LeaveRequest.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LeaveRequest.EndDate" class="control-label"></label>
+                <input asp-for="LeaveRequest.EndDate" type="date" class="form-control" />
+                <span asp-validation-for="LeaveRequest.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="LeaveRequest.Status" type="hidden" value="@SmartItApp.Enums.RequestStatus.New.ToString()" class="form-control" />
+                <span asp-validation-for="LeaveRequest.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,117 @@
+﻿@page
+@model SmartItApp.Pages.Lists.Leave_Requests.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Leave Requests</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    <div class="container">
+        <div class="row height d-flex justify-content-center align-items-center">
+            <div class="col-md-6">
+                <div class="form d-flex" style="margin-bottom:10px">
+                    <form method="post" asp-page-handler="Find" class="d-flex w-100">
+                        <input asp-for="SearchString" type="number" class="form-control form-input" placeholder="Search by Request ID">
+                        <button class="btn btn-outline-dark mt-auto" style="margin-inline-start:10px" type="submit">Find</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.GetSortOrder("Id", Model.CurrentSortOrder)">
+                    Request Id
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.GetSortOrder("Employee", Model.CurrentSortOrder)">
+                    Employee Id
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.GetSortOrder("AbsenceReason", Model.CurrentSortOrder)">
+                    @Html.DisplayNameFor(model => model.LeaveRequest[0].AbsenceReason)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.GetSortOrder("StartDate", Model.CurrentSortOrder)">
+                    @Html.DisplayNameFor(model => model.LeaveRequest[0].StartDate)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.GetSortOrder("EndDate", Model.CurrentSortOrder)">
+                    @Html.DisplayNameFor(model => model.LeaveRequest[0].EndDate)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.GetSortOrder("Comment", Model.CurrentSortOrder)">
+                    @Html.DisplayNameFor(model => model.LeaveRequest[0].Comment)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.GetSortOrder("Status", Model.CurrentSortOrder)">
+                    @Html.DisplayNameFor(model => model.LeaveRequest[0].Status)
+                </a>
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LeaveRequest)
+        {
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.Employee
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AbsenceReason)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> 
+                        @if (User.IsInRole("Admin") || User.IsInRole("Supervisor") || item.Status==SmartItApp.Enums.RequestStatus.New.ToString())
+                        {
+                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+                    </td>
+                    <td>
+                        @if (User.IsInRole("Employee") && item.Status != SmartItApp.Enums.RequestStatus.Submitted.ToString())
+                        {
+                            <form method="post" asp-page-handler="Submit">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                                    Submit
+                                </button>
+                            </form>
+                        }
+                    </td>
+            </tr>
+        }
+    </tbody>
+</table>

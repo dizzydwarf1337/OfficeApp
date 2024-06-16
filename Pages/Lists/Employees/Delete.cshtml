@@ -1,0 +1,148 @@
+﻿@page
+@model SmartItApp.Pages.Lists.Employees.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.FullName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.Subdivision)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.Subdivision)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.Position)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.Position)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.Status)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.DaysOff)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.DaysOff)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.Photo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.Photo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.PeoplePartnerNavigation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.PeoplePartnerNavigation.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.NormalizedUserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.NormalizedUserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.NormalizedEmail)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.NormalizedEmail)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.EmailConfirmed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.EmailConfirmed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.PasswordHash)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.PasswordHash)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.SecurityStamp)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.SecurityStamp)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.ConcurrencyStamp)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.ConcurrencyStamp)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.PhoneNumberConfirmed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.PhoneNumberConfirmed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.TwoFactorEnabled)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.TwoFactorEnabled)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.LockoutEnd)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.LockoutEnd)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.LockoutEnabled)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.LockoutEnabled)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee.AccessFailedCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.AccessFailedCount)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Employee.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>
