@@ -28,7 +28,7 @@ public partial class SmartItAppContext : IdentityDbContext<Employee,IdentityRole
     public virtual DbSet<ProjectEmployee> ProjectEmployees { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Aboba10;Trusted_Connection=True;");
+        => optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Example;Trusted_Connection=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
